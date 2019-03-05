@@ -1,0 +1,42 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring:
+    application:
+        name: card
+    jpa:
+#        open-in-view: false
+        properties:
+            hibernate.jdbc.time_zone: UTC
+        hibernate:
+            ddl-auto: none
+        generate-ddl: true
+        database-platform: org.hibernate.dialect.H2Dialect
+    messages:
+        basename: i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        mode: HTML
+
+server:
+    servlet:
+        session:
+            cookie:
+                http-only: true
+
+
