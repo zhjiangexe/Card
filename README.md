@@ -7,16 +7,13 @@
 - Gradle Wrapper 5.2.1
 
 1. Download `git clone https://github.com/zhjiangexe/Card.git`
-
 2. Go to Card folder `cd Card`
-
 3. Execute `npm install`
 
 # DEVELOPMENT
 
-1. Execute `npm start` to run the webpack-dev-server localhost:9060
-2. Exectue `gradlew` or `./gradlew` to *bootRun* api server localhost:8080
-3. open `http://localhost:9000` in browser and use it
+1. Exectue `gradlew` or `./gradlew` to *bootRun* server localhost:8080/api, localhost:8080/index.html
+2. Execute `npm start` to run the webpack-dev-server localhost:9060
 
 ## RUN BOOT JAR
 
@@ -49,11 +46,13 @@
 
 input `com.jiang.app.vo.CardForm` to `com.jiang.app.web.controller.CreditCardController`
 
-basic field validate by `@Valid` and handle validate error response by `com.jiang.app.web.advice.GlobalAdvice`
+field validate by `@Valid` and handle validate error response by `com.jiang.app.web.advice.GlobalAdvice`
+
+give annotion `com.jiang.app.validator.CardNumber` and validator `com.jiang.app.validator.CardNumberValidator` to do luhn validation
 
 then go through `com.jiang.app.service.CreditCardService`
 
-if this card number luhn validate is fail throw `ServiceException` and handle exception by `com.jiang.app.web.advice.CustomAdvice`
+if this card number is already exist throw `com.jiang.app.exception.ServiceException` and handle the exception by `com.jiang.app.web.advice.CustomAdvice`
 
 in the end, save this information by `com.jiang.app.domain.repository.CreditCardRepository`
 
