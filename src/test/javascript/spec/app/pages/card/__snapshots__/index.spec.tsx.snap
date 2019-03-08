@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Card snapshot 1`] = `
+<Container
+  tag="div"
+>
+  <Row
+    tag="div"
+  >
+    <Col
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <h1>
+        Credit Card System
+      </h1>
+    </Col>
+  </Row>
+  <Row
+    tag="div"
+  >
+    <Col
+      md="6"
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <add
+        addCard={[Function]}
+      />
+    </Col>
+    <Col
+      md="6"
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <listBlock
+        cards={Array []}
+      />
+    </Col>
+  </Row>
+</Container>
+`;

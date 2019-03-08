@@ -5,7 +5,7 @@ import { ICard } from 'app/pages/card/index'
 const listBlock: FunctionComponent<{ cards: ICard[] }> = ({ cards = [] }) => (
   <div>
     <h2>Existing Cards</h2>
-    <Table bordered>
+    <Table striped responsive>
       <thead>
       <tr>
         <th>Name</th>
@@ -14,22 +14,22 @@ const listBlock: FunctionComponent<{ cards: ICard[] }> = ({ cards = [] }) => (
         <th>Limit</th>
       </tr>
       </thead>
+      <tbody>
       {
         cards.length > 0
-          ? <tbody>
-          {
-            cards.map((card, idx) => (
-              <tr key={idx}>
-                <td>{card.userName}</td>
-                <td>{card.cardNo}</td>
-                <td>£{card.balance}</td>
-                <td>£{card.limit}</td>
-              </tr>
-            ))
-          }
-          </tbody>
-          : null
+          ? cards.map((card, idx) => (
+            <tr key={idx}>
+              <td>{card.userName}</td>
+              <td>{card.cardNo}</td>
+              <td>£{card.balance}</td>
+              <td>£{card.limit}</td>
+            </tr>
+          ))
+          : <tr>
+            <td colSpan={4}>There are no cards.</td>
+          </tr>
       }
+      </tbody>
     </Table>
   </div>
 )

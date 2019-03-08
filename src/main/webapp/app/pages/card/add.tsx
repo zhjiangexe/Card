@@ -1,8 +1,9 @@
-import axios from 'axios'
 import React, { FunctionComponent, useState } from 'react'
 import { toast } from 'react-toastify'
-import { Alert, Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap'
+import { Alert, Button, Form, FormGroup, Input, Label } from 'reactstrap'
 import { IResp } from 'app/interface/response'
+import { ICard } from 'app/pages/card/index'
+import { postAdd } from 'app/pages/card/service'
 
 interface IFormData {
   userName: string
@@ -22,15 +23,13 @@ const add: FunctionComponent<{ addCard }> = ({ addCard }) => {
   const notify = message => toast.error(message)
   const addFun = async () => {
     try {
-      const resp = await axios.post('http://localhost:8080/api/cards', form)
-      if (resp.status === 201) {
-        addCard(resp.data.data)
-        setForm({ userName: '', cardNo: '', limit: '' })
-        setFormErr({})
-      }
+      const data: ICard = await postAdd(form)
+      addCard(data)
+      setForm({ userName: '', cardNo: '', limit: '' })
+      setFormErr({})
     } catch (e) {
       if (e.response) {
-        const resp: IResp<any> = e.response.data
+        const resp: IResp<null> = e.response.data
         const error = resp.error
         if (error) {
           if (error.errors) {

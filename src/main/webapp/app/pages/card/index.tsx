@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { Col, Container, Row } from 'reactstrap'
@@ -7,6 +6,7 @@ import { IResp } from 'app/interface/response'
 
 import Add from './add'
 import List from './list'
+import { getCards } from 'app/pages/card/service'
 
 export interface ICard {
   userName: string
@@ -23,13 +23,11 @@ const cardPage: FunctionComponent = props => {
   }
   const fetchCards = async () => {
     try {
-      const resp = await axios.get('http://localhost:8080/api/cards')
-      if (resp.data) {
-        setCards(resp.data.data)
-      }
+      const data = await getCards()
+      setCards(data)
     } catch (e) {
       if (e.response) {
-        const resp: IResp<any> = e.response.data
+        const resp: IResp<null> = e.response.data
         const error = resp.error
         if (error) {
           if (error.errors) {
@@ -47,13 +45,18 @@ const cardPage: FunctionComponent = props => {
   return (
     <Container>
       <Row>
-        <Col xs="12" sm="8" md="8">
+        <Col>
           <h1>Credit Card System</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col md="6">
           <Add addCard={addCard}/>
+        </Col>
+        <Col md="6">
           <List cards={cards}/>
         </Col>
       </Row>
-
     </Container>
   )
 }

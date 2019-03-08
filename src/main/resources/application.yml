@@ -16,7 +16,7 @@
 
 spring:
     application:
-        name: card
+        name: app
     jpa:
 #        open-in-view: false
         properties:
