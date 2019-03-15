@@ -1,8 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 import { Col, Container, Row } from 'reactstrap'
-
-import { IResp } from 'app/interface/response'
 
 import Add from './add'
 import List from './list'
@@ -16,8 +13,7 @@ export interface ICard {
 }
 
 const cardPage: FunctionComponent = props => {
-  const [cards, setCards] = useState<ICard[]>([])
-  const notify = message => toast.error(message)
+  const [cards, setCards] = useState([])
   const addCard = (newCard: ICard) => {
     setCards([...cards, newCard])
   }
@@ -26,17 +22,7 @@ const cardPage: FunctionComponent = props => {
       const data = await getCards()
       setCards(data)
     } catch (e) {
-      if (e.response) {
-        const resp: IResp<null> = e.response.data
-        const error = resp.error
-        if (error) {
-          if (error.errors) {
-            const errorMap = Object.assign({}, ...error.errors.map(elem => ({ [elem.field]: elem.message })))
-          } else {
-            notify(error.message)
-          }
-        }
-      }
+      console.log(e)
     }
   }
   useEffect(() => {

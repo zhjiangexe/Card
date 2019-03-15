@@ -1,8 +1,5 @@
 import React, { FunctionComponent, useState } from 'react'
-import { toast } from 'react-toastify'
 import { Alert, Button, Form, FormGroup, Input, Label } from 'reactstrap'
-import { IResp } from 'app/interface/response'
-import { ICard } from 'app/pages/card/index'
 import { postAdd } from 'app/pages/card/service'
 
 interface IFormData {
@@ -20,24 +17,18 @@ interface IFormErr {
 const add: FunctionComponent<{ addCard }> = ({ addCard }) => {
   const [form, setForm] = useState<IFormData>({ userName: '', cardNo: '', limit: '' })
   const [formErr, setFormErr] = useState<IFormErr>({})
-  const notify = message => toast.error(message)
   const addFun = async () => {
     try {
-      const data: ICard = await postAdd(form)
+      const data = await postAdd(form)
       addCard(data)
       setForm({ userName: '', cardNo: '', limit: '' })
       setFormErr({})
-    } catch (e) {
-      if (e.response) {
-        const resp: IResp<null> = e.response.data
-        const error = resp.error
-        if (error) {
-          if (error.errors) {
-            const errorMap = Object.assign({}, ...error.errors.map(elem => ({ [elem.field]: elem.message })))
-            setFormErr(errorMap)
-          } else {
-            notify(error.message)
-          }
+    } catch (data) {
+      if (data) {
+        const err = data.error
+        if (err !== undefined && err.code === 'IV100001') {
+          const errorMap = Object.assign({}, ...err.errors.map(elem => ({ [elem.field]: elem.message })))
+          setFormErr(errorMap)
         }
       }
     }

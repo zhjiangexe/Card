@@ -10,7 +10,7 @@ describe('Card', () => {
   const devProps = {}
   const wrapper = (props = devProps) => {
     if (!mountedWrapper) {
-      mountedWrapper = shallow(
+      mountedWrapper = mount(
         <Card/>
       )
     }
@@ -21,22 +21,12 @@ describe('Card', () => {
     mountedWrapper = undefined
   })
 
-  it('Card snapshot', () => {
+  it('Renders a Header component with List, Add components.', () => {
     const component = wrapper()
 
     expect(component).toMatchSnapshot()
-  })
-
-  it('Card has Add component', () => {
-    const component = wrapper()
-
-    expect(component.find(Add)).toHaveLength(1)
-  })
-
-  it('Card has List component', () => {
-    const component = wrapper()
-
-    expect(component.find(List)).toHaveLength(1)
+    expect(component.find(List).length).toEqual(1)
+    expect(component.find(Add).length).toEqual(1)
   })
 
 })

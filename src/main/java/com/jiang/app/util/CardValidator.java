@@ -5,8 +5,8 @@ import java.util.stream.IntStream;
 
 public class CardValidator {
   public static boolean validateLuhn(String cardNo) {
-    // less than, greater than
-    if (cardNo.length() < 12 || cardNo.length() > 19 || cardNo.chars().anyMatch(a -> a < 48 || a > 57)) {
+    // when any single char is less than 48 or greater than 57(it's not 0 ~ 9), it's invalid, return false
+    if (cardNo.length() < 12 || cardNo.length() > 19 || cardNo.chars().anyMatch(c -> c < 48 || c > 57)) {
       return false;
     }
     PrimitiveIterator.OfInt iterator = IntStream.iterate(
