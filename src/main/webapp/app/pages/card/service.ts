@@ -6,7 +6,7 @@ const SERVER_API_URL = process.env.SERVER_API_URL
 
 const cardsUrl = `${SERVER_API_URL}/api/cards`
 
-const notify = message => toast.error(message)
+export const notify = message => toast.error(message)
 
 export const getCards = async () =>
   new Promise<ICard[]>(((resolve, reject) => {

@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'reactstrap'
 
 import Add from './add'
 import List from './list'
-import { getCards } from 'app/pages/card/service'
+import { getCards, notify } from 'app/pages/card/service'
 
 export interface ICard {
   userName: string
@@ -22,7 +22,7 @@ const cardPage: FunctionComponent = props => {
       const data = await getCards()
       setCards(data)
     } catch (e) {
-      console.log(e)
+      notify(e)
     }
   }
   useEffect(() => {
